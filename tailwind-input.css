@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@source "./app/Views/**/*.php";
+@source "./public/js/**/*.js";
+@plugin "daisyui" {
+    themes: nord --default, dark --prefersdark, nord;
+}
+@plugin "@tailwindcss/typography";
+
+@theme {
+    /* Fonts */
+    --font-sans: "Fira Sans Extra Condensed", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Fira Sans Extra Condensed", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    /* Background images */
+    --bg-bg1: url("../gfx/bg1.webp");
+    --bg-bg2: url("../gfx/bg2.webp");
+    --bg-bg3: url("../gfx/bg3.webp");
+}
+
+@layer base {
+    html, body {
+        @apply min-h-screen font-sans;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-heading;
+    }
+
+    h1, h2, h3 {
+        font-weight: 700;
+    }
+
+    h4, h5, h6 {
+        font-weight: 500;
+    }
+}
+
+@layer utilities {
+    /* Backgrounds */
+    .custom-bg-1 {background-image: var(--bg-bg1);}
+    .custom-bg-2 {background-image: var(--bg-bg2);}
+    .custom-bg-3 {background-image: var(--bg-bg3);}
+    .custom-bg-1, .custom-bg-2, .custom-bg-3 {
+        @apply bg-cover bg-center bg-no-repeat bg-black/60 bg-blend-overlay;
+    }
+
+    /* Importance styles */
+    .importance-0 {@apply btn-soft;}
+    .importance-1 {@apply btn-soft btn-secondary;}
+    .importance-2 {@apply btn-soft btn-info;}
+    .importance-3 {@apply btn-soft btn-success;}
+
+    /* Text Utilities */
+    .limit-text {
+        max-width: 35ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+}
+
