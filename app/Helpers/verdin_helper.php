@@ -61,7 +61,7 @@ if(!function_exists('logged_in')) {
  */
 if(!function_exists('version')) {
 	function version() {
-		return '5.07';
+		return '7.00';
 	}
 }
 

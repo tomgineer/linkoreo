@@ -83,6 +83,9 @@ public function updateLink(array $data, int $link_id):void{
     // Update existing link
     $builder->where('id', $link_id)
             ->update($data);
+
+    // Clear all cache after update
+    cache()->clean();
 }
 
 /**
@@ -104,6 +107,9 @@ public function updateTab(array $data, int $tab_id):void{
     // Update existing tab
     $builder->where('id', $tab_id)
             ->update($data);
+
+    // Clear all cache after update
+    cache()->clean();
 }
 
 /**
@@ -128,6 +134,9 @@ public function updateSection(array $data, int $section_id):void{
     // Update existing tab
     $builder->where('id', $section_id)
             ->update($data);
+
+    // Clear all cache after update
+    cache()->clean();
 }
 
 /**
@@ -191,7 +200,10 @@ public function delete_record(string $table, int $id): bool {
                  ->where('id', $id)
                  ->delete();
 
-        return $this->db->affectedRows() > 0;
+        if ($this->db->affectedRows() > 0) {
+            cache()->clean();
+            return true;
+        }
     } catch (\Throwable $e) {
         log_message('error', 'Delete record failed in model: ' . $e->getMessage());
         return false;
@@ -220,6 +232,9 @@ public function updateOrder(string $table, array $ids): void {
         $builder->where('id', (int) $id)
                 ->update(['position' => $position + 1]);
     }
+
+    // Clear all cache after update
+    cache()->clean();
 }
 
 } // END Class

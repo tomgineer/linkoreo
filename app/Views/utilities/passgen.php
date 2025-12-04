@@ -1,10 +1,10 @@
 <?= $this->extend('layout_default') ?>
 <?= $this->section('content') ?>
 
-<main class="mt-10 mb-4 px-6 flex-1" data-js-passgen>
+<main class="mt-10 mb-12 px-6 flex-1" data-js-passgen>
     <div class="grid gap-y-4 gap-x-8 md:grid-cols-2 max-w-[75rem] mx-auto">
 
-    <h1 class="col-span-2 text-2xl mb-2 font-semibold text-neutral-content">Password Generator</h1>
+    <h1 class="lg:col-span-2 text-2xl mb-2 font-semibold text-neutral-content">Password Generator</h1>
 
         <?php for ($i = 5; $i <= 50; $i += 5): ?>
 

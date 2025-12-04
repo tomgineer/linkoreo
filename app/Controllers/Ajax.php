@@ -155,14 +155,16 @@ public function get_links_view(int $tab_id, int $section_id) {
 
     // Cache settings
     $cacheName = "links_{$tab_id}_{$section_id}";
-    // if ($cachedView = cache($cacheName)) return $cachedView; //Disabled for DEV
+    if (!logged_in() && $cachedView = cache($cacheName)) return $cachedView;
 
     // Generate view content
     $data['links'] = $this->main->getLinksArr($tab_id, $section_id);
     $output = view('site/links', $data);
 
     // Store in cache for 1 month
-    cache()->save($cacheName, $output, MONTH);
+    if (!logged_in()) {
+        cache()->save($cacheName, $output, MONTH);
+    }
 
     return $output;
 }

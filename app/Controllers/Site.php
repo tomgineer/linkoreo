@@ -9,9 +9,11 @@ class Site extends BaseController {
  * @return string Rendered frontpage HTML.
  */
 public function links() {
+    $this->main->trackVisitor();
+
     // Cache settings
     $cacheName = 'frontpage';
-    // if ($cachedView = cache($cacheName)) return $cachedView; // Disabled for DEV
+    if (!logged_in() && $cachedView = cache($cacheName)) return $cachedView;
 
     // Generate view content
     $data = [
@@ -21,10 +23,9 @@ public function links() {
     $output = view('site/main', $data);
 
     // Store in cache for 1 month
-    cache()->save($cacheName, $output, MONTH);
-
-    // Track visitor (not cached)
-    $this->main->trackVisitor();
+    if (!logged_in()) {
+        cache()->save($cacheName, $output, MONTH);
+    }
 
     return $output;
 }

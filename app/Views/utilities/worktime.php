@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 
-<main class="mt-10 mb-4 px-6 flex-1">
+<main class="mt-10 mb-12 px-6 flex-1">
     <div class="max-w-[70rem] mx-auto flex flex-col gap-8">
 
         <!-- Header -->
@@ -47,7 +47,7 @@
 
         <!-- Big center clock -->
         <section class="flex flex-col items-center justify-center mt-8 gap-3">
-            <div class="work-time-display font-mono text-[10rem] text-primary-content/85 px-10 text-center select-none leading-tight tracking-[-2px]">
+            <div class="work-time-display font-mono text-5xl lg:text-[10rem] text-primary-content/85 px-10 text-center select-none leading-tight tracking-[-2px]">
                 00:00:00
             </div>
 

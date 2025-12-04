@@ -70,8 +70,8 @@ $elements = [
 <?= $this->extend('layout_default') ?>
 <?= $this->section('content') ?>
 
-<main class="mt-10 mb-4 px-6 flex-1" data-js-datetime>
-    <div class="grid gap-y-4 gap-x-8 md:grid-cols-2 max-w-[75rem] mx-auto mb-24">
+<main class="mt-10 mb-12 px-6 flex-1" data-js-datetime>
+    <div class="grid gap-y-4 gap-x-8 md:grid-cols-2 max-w-[75rem] mx-auto">
 
         <h1 class="col-span-2 text-2xl mb-2 font-semibold text-neutral-content">
             DateTime Calculator

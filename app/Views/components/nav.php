@@ -1,6 +1,6 @@
 <nav class="navbar bg-base-300 z-999">
     <div class="flex-1">
-        <a class="btn btn-ghost text-xl" href="<?= base_url() ?>">
+        <a class="btn btn-ghost text-xl px-1 lg:px-4" href="<?= base_url() ?>">
             <img class="h-8 w-auto opacity-85 hover:opacity-100 transition-opacity duration-200 select-none" src="<?= path_gfx() . 'logo.svg' ?>" alt="Linkoreo Logo">
         </a>
     </div>
@@ -79,10 +79,10 @@
                 type="text"
                 placeholder="Search"
                 data-js-search
-                class="input input-bordered w-96 text-base" />
+                class="input input-bordered w-96 text-base hidden lg:flex" />
         <?php endif; ?>
 
-        <div class="dropdown dropdown-end">
+        <div class="dropdown dropdown-end hidden lg:block">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                 <div class="w-10 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">

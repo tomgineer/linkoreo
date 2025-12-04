@@ -12,7 +12,7 @@
     ];
 ?>
 
-<main class="mt-10 mb-4 px-6 flex-1">
+<main class="mt-10 mb-12 px-6 flex-1">
     <div
         id="hash-tool"
         class="max-w-[75rem] mx-auto flex flex-col gap-6"

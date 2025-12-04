@@ -14,7 +14,7 @@
                     </button>
 
                     <?php if (!empty($sections[0]['section_id'])): ?>
-                        <ul>
+                        <ul class="hidden lg:block">
                             <?php foreach ($sections as $sec): ?>
                                 <?php if (!empty($sec['section'])): ?>
                                     <li>
