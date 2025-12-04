@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linkoreo :: Delicious Bookmark Manager</title>
-    <meta name="description" content="Syndesu is your go-to app for organizing, syncing, and accessing bookmarks across devices. Simplify your browsing experience.">
+    <meta name="description" content="Linkoreo is your go-to app for organizing, syncing, and accessing bookmarks across devices. Simplify your browsing experience.">
     <meta name="base-url" content="<?=base_url();?>">
     <meta name="keywords" content="bookmarks, bookmark manager, sync bookmarks, organize bookmarks, Linkoreo">
     <meta name="author" content="Tom Papatolis">
@@ -12,7 +12,7 @@
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Linkoreo :: Delicious Bookmark Manager">
-    <meta property="og:description" content="Simplify your browsing experience with Syndesu. Organize and sync bookmarks across devices seamlessly.">
+    <meta property="og:description" content="Simplify your browsing experience with Linkoreo. Organize and sync bookmarks across devices seamlessly.">
     <meta property="og:image" content="https://linkoreo.com/icon.jpg">
     <meta property="og:url" content="https://linkoreo.com">
     <meta property="og:type" content="app">

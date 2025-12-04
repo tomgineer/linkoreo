@@ -4,15 +4,31 @@
  * Attaches click listeners to all tab buttons marked with
  * `data-action="js-fetch-links"`. When a tab is clicked,
  * its corresponding links are fetched and displayed. The
- * first tab is automatically activated on initialization.
+ * last visited tab is restored from localStorage if available;
+ * otherwise, the first tab is automatically activated.
  *
  * @function tabsInit
  * @returns {void}
  */
 export function tabsInit() {
     const buttons = document.querySelectorAll('[data-action="js-fetch-links"]');
+    if (!buttons.length) return;
 
-    buttons.forEach((button) => {
+    // Try to restore the last active tab from localStorage
+    const lastTab = localStorage.getItem('lastTab');
+    const lastSection = localStorage.getItem('lastSection');
+
+    let activeButton = [...buttons].find(btn =>
+        btn.dataset.tabId === lastTab && btn.dataset.sectionId === lastSection
+    );
+
+    if (!activeButton) {
+        // Fallback to the first button
+        activeButton = buttons[0];
+    }
+
+    // Attach click listeners
+    buttons.forEach(button => {
         button.addEventListener('click', () => {
             const tabId = button.dataset.tabId;
             const sectionId = button.dataset.sectionId;
@@ -23,17 +39,18 @@ export function tabsInit() {
             // Add it to the clicked one
             button.classList.add('menu-active');
 
+            // Store the active tab
+            localStorage.setItem('lastTab', tabId);
+            localStorage.setItem('lastSection', sectionId);
+
             // Load links for this tab
             displayLinks(tabId, sectionId);
         });
     });
 
-    // Mark the first one active on init
-    const firstButton = buttons[0];
-    if (firstButton) {
-        firstButton.classList.add('menu-active');
-        displayLinks(firstButton.dataset.tabId, firstButton.dataset.sectionId);
-    }
+    // Activate the restored or first tab
+    activeButton.classList.add('menu-active');
+    displayLinks(activeButton.dataset.tabId, activeButton.dataset.sectionId);
 }
 
 /**
