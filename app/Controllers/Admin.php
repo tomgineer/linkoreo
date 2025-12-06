@@ -157,5 +157,19 @@ public function update_section(int $section_id) {
     return redirect()->to( base_url() );
 }
 
+/**
+ * Clears all cached data from the system cache and redirects to the homepage.
+ *
+ * This method ensures that only logged-in users can trigger
+ * a full cache cleanup to prevent unauthorized cache clearing.
+ *
+ * @return \CodeIgniter\HTTP\RedirectResponse|null
+ */
+public function clear_cache() {
+    if (!logged_in()) return;
+    cache()->clean();
+    return redirect()->to( base_url() );
+}
+
 } // END Class
 

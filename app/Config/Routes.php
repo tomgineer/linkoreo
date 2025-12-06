@@ -59,3 +59,4 @@ $routes->get('admin/edit_tab/(:num)', 'Admin::edit_tab/$1');
 $routes->post('admin/update_tab/(:num)', 'Admin::update_tab/$1');
 $routes->get('admin/edit_section/(:num)', 'Admin::edit_section/$1');
 $routes->post('admin/update_section/(:num)', 'Admin::update_section/$1');
+$routes->get('admin/clear_cache', 'Admin::clear_cache');
