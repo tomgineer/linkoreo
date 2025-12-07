@@ -14,6 +14,13 @@ export function tabsInit() {
     const buttons = document.querySelectorAll('[data-action="js-fetch-links"]');
     if (!buttons.length) return;
 
+    // Reset localStorage if home button was used
+    const homeButton = document.querySelector('[js-home-button]');
+    homeButton?.addEventListener('click', () => {
+        localStorage.removeItem('lastTab');
+        localStorage.removeItem('lastSection');
+    });
+
     // Try to restore the last active tab from localStorage
     const lastTab = localStorage.getItem('lastTab');
     const lastSection = localStorage.getItem('lastSection');

@@ -1,6 +1,6 @@
 <nav class="navbar bg-base-300 z-999">
     <div class="flex-1">
-        <a class="btn btn-ghost text-xl px-1 lg:px-4" href="<?= base_url() ?>">
+        <a class="btn btn-ghost text-xl px-1 lg:px-4" href="<?= base_url() ?>" js-home-button>
             <img class="h-8 w-auto opacity-85 hover:opacity-100 transition-opacity duration-200 select-none" src="<?= path_gfx() . 'logo.svg' ?>" alt="Linkoreo Logo">
         </a>
     </div>
