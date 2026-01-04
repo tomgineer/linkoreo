@@ -138,3 +138,9 @@ assets/
 
 # Public graphics, logos, and uploads
 public/gfx/
+
+# CI4 Configuration Files
+app/Config/App.php
+app/Config/Database.php
+app/Config/Email.php
+app/Config/Cookie.php
