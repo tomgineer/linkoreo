@@ -6,8 +6,6 @@
 
         <h1>So... How Do You Contact Me?</h1>
 
-        <img src="<?=path_gfx().'contact.webp'?>">
-
         <p>
             This is the part of the website where I’m supposed to impress you with a long list of
             ways to reach me: social networks, messenger apps, community servers, secret underground

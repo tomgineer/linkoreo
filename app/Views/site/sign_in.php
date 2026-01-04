@@ -5,9 +5,8 @@
 
     <div class="absolute inset-0 -z-10">
         <img
-            src="<?= path_gfx() . 'sign_in_bg.webp' ?>"
-            alt=""
-            class="h-full w-full object-cover brightness-40">
+            src="<?= path_gfx() . 'bg.svg' ?>"
+            class="h-full w-full object-cover">
     </div>
 
     <?php if (! logged_in()): ?>

@@ -1,7 +1,7 @@
 <?= $this->extend('layout_default') ?>
 <?= $this->section('content') ?>
 
-<main class="flex-1 px-6 pt-20 pb-10 custom-bg-1" data-js-edit-link>
+<main class="flex-1 px-6 pt-20 pb-10 bg-linkoreo" data-js-edit-link>
     <div class="max-w-3xl mx-auto">
         <div class="card bg-base-200 shadow-xl">
             <div class="card-body space-y-3 relative">

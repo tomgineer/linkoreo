@@ -5,8 +5,6 @@
     <article class="prose prose-neutral mx-auto mt-8 mb-12">
         <h1>The Story of My Platform</h1>
 
-        <img src="<?=path_gfx().'about.webp'?>">
-
         <p>Once upon a time - somewhere around the year 2010 - a humble little web page came to life. It wasn’t fancy, it didn’t run on any big, shiny platform, and it certainly didn’t have AI, frameworks, or those weird cookie popups that chase you around the internet. Nope. It was just me, a text editor, and a static HTML page.</p>
 
         <p>That page was simple. Pure. Honest. It had one job: to host all my links in one place - a personal little corner of the web that traveled with me everywhere I went. Over the years, it became more than just a bunch of links; it became a quiet digital companion, always ready to serve, never asking for updates, and definitely not built on someone else’s platform. It was mine - entirely.</p>

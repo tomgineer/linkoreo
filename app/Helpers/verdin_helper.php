@@ -57,15 +57,6 @@ if(!function_exists('logged_in')) {
 }
 
 /**
- * Version
- */
-if(!function_exists('version')) {
-	function version() {
-		return '7.04';
-	}
-}
-
-/**
  * Password Generator
  */
 if(!function_exists('pwd')) {

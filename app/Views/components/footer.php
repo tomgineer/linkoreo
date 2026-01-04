@@ -1,24 +1,38 @@
-<footer class="bg-base-300 text-neutral-content justify-center items-center text-sm p-4 font-light text-center flex gap-2 flex-col lg:flex-row lg:gap-8">
-    <p class="footer__text">
-        Designed with ❤️ by
-        <a href="https://github.com/tomgineer/linkoreo" target="_blank" rel="nofollow" class="link link-hover text-accent font-semibold">
-            Tom Papatolis
+<footer
+    class="bg-base-300 justify-center items-center text-xs p-4 text-base-content/50
+        text-center flex gap-3 flex-col lg:flex-row lg:gap-6 font-mono">
+    <p>
+        Designed with <span class="text-white">❤️</span> by
+        <a href="https://tompapatolis.com" target="_blank" rel="noopener noreferrer nofollow" class="link link-hover text-base-content/85">Tom Papatolis.</a>
+        Visit Project on
+        <a href="https://github.com/tomgineer/linkoreo" target="_blank" rel="noopener noreferrer nofollow" class="link link-hover text-base-content/85">
+            GitHub
         </a>
     </p>
-    <p class="footer__text">
+    <p>
         Linkoreo Bookmark Manager
-        <span class="text-accent font-semibold">v<?=version()?></span>
+        <span class="text-base-content/85">v<?=LINKOREO_VERSION?></span>
     </p>
-    <p class="footer__text">
+    <p>
         Rendered in
-        <span class="text-accent font-semibold">{elapsed_time}s</span>
+        <span class="text-base-content/85">{elapsed_time}s</span>
     </p>
-    <p class="footer__text">
+    <p>
         Total:
-        <span class="text-accent font-semibold"><?=$count?></span> bookmarks
+        <span class="text-base-content/85"><?=$count?></span> bookmarks
     </p>
-    <p class="footer__text">
+    <p>
         Proudly served
-        <span class="text-accent font-semibold"><?=nf($hits)?></span> times
+        <span class="text-base-content/85"><?=nf($hits)?></span> times
     </p>
+
+    <div class="flex gap-1">
+        <span class="bg-base-100 size-4 border border-base-content/35"></span>
+        <span class="bg-base-200 size-4 border border-base-content/35"></span>
+        <span class="bg-base-300 size-4 border border-base-content/35"></span>
+        <span class="bg-primary size-4 border border-base-content/35"></span>
+        <span class="bg-secondary size-4 border border-base-content/35"></span>
+        <span class="bg-accent size-4 border border-base-content/35"></span>
+        <span class="bg-info size-4 border border-base-content/35"></span>
+    </div>
 </footer>

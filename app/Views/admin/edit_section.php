@@ -1,7 +1,7 @@
 <?= $this->extend('layout_default') ?>
 <?= $this->section('content') ?>
 
-<main class="flex-1 px-6 pt-30 pb-10 custom-bg-3" data-js-edit-section>
+<main class="flex-1 px-6 pt-30 pb-10 bg-linkoreo" data-js-edit-section>
     <div class="max-w-5xl mx-auto">
         <div class="card bg-base-200 shadow-xl overflow-hidden">
             <!-- Make the card itself a grid -->

@@ -1,0 +1,22 @@
+@layer utilities {
+    /* Backgrounds */
+    .bg-linkoreo {
+        background-image: url("../gfx/bg.svg");
+        @apply bg-cover bg-center bg-no-repeat;
+    }
+
+    /* Importance styles */
+    .importance-0 {@apply btn-soft;}
+    .importance-1 {@apply btn-soft btn-secondary;}
+    .importance-2 {@apply btn-soft btn-info;}
+    .importance-3 {@apply btn-soft btn-success;}
+
+    /* Text Utilities */
+    .limit-text {
+        max-width: 35ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+}

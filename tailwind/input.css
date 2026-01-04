@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@source "./app/Views/**/*.php";
+@source "./public/js/**/*.js";
+@plugin "daisyui" {
+    themes: nord --default, dark --prefersdark, nord;
+}
+@plugin "@tailwindcss/typography";
+
+@theme {
+    /* Fonts */
+    --font-sans: "Fira Sans Extra Condensed", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Fira Sans Extra Condensed", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@layer base {
+    html, body {
+        @apply min-h-screen font-sans;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-heading;
+    }
+
+    h1, h2, h3 {
+        font-weight: 700;
+    }
+
+    h4, h5, h6 {
+        font-weight: 500;
+    }
+}
+
+@import "./components.css";
+@import "./utilities.css";

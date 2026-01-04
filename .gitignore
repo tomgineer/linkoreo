@@ -133,10 +133,6 @@ dist/
 # Local Files
 .local/
 
-# Prepros config file
-prepros.config
-public/prepros.config
-
 # Compiled or temporary asset files
 assets/
 
