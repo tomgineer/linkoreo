@@ -86,7 +86,7 @@
 
         <?php if (body_class() === 'site-links'): ?>
             <input
-                type="text"
+                type="search"
                 placeholder="Search"
                 data-js-search
                 class="input input-bordered w-96 text-base hidden lg:flex" />

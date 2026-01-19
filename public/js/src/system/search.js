@@ -14,6 +14,7 @@ export default function initSearch() {
     const searchInput = document.querySelector('[data-js-search]');
     if (!searchInput) return;
 
+    const storageKey = 'searchTerm';
     let debounceTimer;
 
     searchInput.addEventListener('input', () => {
@@ -22,10 +23,12 @@ export default function initSearch() {
 
         if (!query) {
             clearTimeout(debounceTimer);
+            sessionStorage.removeItem(storageKey);
             restoreDefaultSection();
             return;
         }
 
+        sessionStorage.setItem(storageKey, query);
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
             displaySearchResults(query);
@@ -34,16 +37,28 @@ export default function initSearch() {
 
     // Re-sync results after back/forward cache restore or initial load.
     const syncSearchState = () => {
-        const query = searchInput.value.trim();
+        const inputQuery = searchInput.value.trim();
+        const storedQuery = sessionStorage.getItem(storageKey) || '';
+        const query = inputQuery || storedQuery;
         if (query) {
+            if (!inputQuery) {
+                searchInput.value = query;
+            }
+            sessionStorage.setItem(storageKey, query);
             displaySearchResults(query);
         } else {
+            sessionStorage.removeItem(storageKey);
             restoreDefaultSection();
         }
     };
 
-    window.addEventListener('pageshow', syncSearchState);
-    syncSearchState();
+    const scheduleSyncSearchState = () => {
+        // Delay to allow browser to restore form values on navigation.
+        setTimeout(syncSearchState, 0);
+    };
+
+    window.addEventListener('pageshow', scheduleSyncSearchState);
+    scheduleSyncSearchState();
 }
 
 /**

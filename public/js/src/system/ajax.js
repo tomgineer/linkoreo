@@ -20,6 +20,10 @@ export function tabsInit() {
     homeButton?.addEventListener('click', () => {
         localStorage.removeItem('lastTab');
         localStorage.removeItem('lastSection');
+        if (searchInput) {
+            searchInput.value = '';
+        }
+        sessionStorage.removeItem('searchTerm');
     });
 
     // Try to restore the last active tab from localStorage
@@ -54,6 +58,7 @@ export function tabsInit() {
             // Clear any active search term when navigating the menu
             if (searchInput) {
                 searchInput.value = '';
+                sessionStorage.removeItem('searchTerm');
             }
 
             // Load links for this tab
