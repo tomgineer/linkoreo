@@ -53,5 +53,4 @@ public function sign_in() {
     $this->main->trackVisitor();
 }
 
-
 } // END Class

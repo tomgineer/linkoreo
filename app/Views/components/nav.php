@@ -67,6 +67,8 @@
                 </li>
 
             <?php endif; ?>
+
+            <!-- Utilities -->
             <li>
                 <details>
                     <summary>Utilities</summary>
