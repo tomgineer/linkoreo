@@ -31,6 +31,19 @@ export default function initSearch() {
             displaySearchResults(query);
         }, 300); // tweak delay as you like
     });
+
+    // Re-sync results after back/forward cache restore or initial load.
+    const syncSearchState = () => {
+        const query = searchInput.value.trim();
+        if (query) {
+            displaySearchResults(query);
+        } else {
+            restoreDefaultSection();
+        }
+    };
+
+    window.addEventListener('pageshow', syncSearchState);
+    syncSearchState();
 }
 
 /**

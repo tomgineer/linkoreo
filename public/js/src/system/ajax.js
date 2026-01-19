@@ -13,6 +13,7 @@
 export function tabsInit() {
     const buttons = document.querySelectorAll('[data-action="js-fetch-links"]');
     if (!buttons.length) return;
+    const searchInput = document.querySelector('[data-js-search]');
 
     // Reset localStorage if home button was used
     const homeButton = document.querySelector('[js-home-button]');
@@ -49,6 +50,11 @@ export function tabsInit() {
             // Store the active tab
             localStorage.setItem('lastTab', tabId);
             localStorage.setItem('lastSection', sectionId);
+
+            // Clear any active search term when navigating the menu
+            if (searchInput) {
+                searchInput.value = '';
+            }
 
             // Load links for this tab
             displayLinks(tabId, sectionId);
