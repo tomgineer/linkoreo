@@ -57,9 +57,13 @@ public function edit_link(int $link_id = 0) {
  */
 public function update_link(int $link_id) {
     if (!logged_in()) return;
+
     $data = $this->request->getPost();
     $this->admin->updateLink($data, $link_id);
-    return redirect()->to( base_url() );
+
+    $this->clear_cache();
+
+    return redirect()->to(base_url());
 }
 
 /**
