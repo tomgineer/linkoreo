@@ -12,17 +12,17 @@
 
     /* Important */
     .importance-1 {
-        @apply border-l-4 border-l-green-600 hover:border-l-green-500;
+        @apply border-l-4 border-l-green-600 hover:border-l-green-500 hover:bg-green-700 hover:text-white;
     }
 
     /* Very Important */
     .importance-2 {
-        @apply border-l-4 border-l-orange-600 hover:border-l-orange-500;
+        @apply border-l-4 border-l-orange-600 hover:border-l-orange-500 hover:bg-orange-700 hover:text-white;
     }
 
     /* Game Changer */
     .importance-3 {
-        @apply border-l-4 border-l-rose-600 hover:border-l-rose-500;
+        @apply border-l-4 border-l-rose-600 hover:border-l-rose-500 hover:bg-rose-700 hover:text-white;
     }
 
     /* Text Utilities */

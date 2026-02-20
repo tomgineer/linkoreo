@@ -45,15 +45,15 @@
 
                             <a href="<?= esc($link['url']) ?>"
                                 rel="nofollow"
-                                class="btn btn-soft shadow-md flex flex-col gap-0 h-20 importance-<?= $link['importance'] ?>
+                                class="btn btn-soft shadow-md flex flex-col gap-0 px-4 py-2 importance-<?= $link['importance'] ?>
                                         transform transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg
-                                        w-full rounded-xl">
+                                        w-full rounded-xl h-auto">
                                 <span class="text-lg font-medium">
                                     <?= esc($link['label'] ?: $link['url']) ?>
                                 </span>
 
                                 <?php if (!empty($link['description'])): ?>
-                                    <div class="text-sm opacity-80 font-normal limit-text">
+                                    <div class="text-sm text-white/70 font-light limit-text">
                                         <?= esc($link['description']) ?>
                                     </div>
                                 <?php endif; ?>

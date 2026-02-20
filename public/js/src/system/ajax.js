@@ -1,11 +1,13 @@
+import { getStateFromUrl, setStateInUrl } from './state.js';
+
 /**
  * Initializes tab buttons and handles tab switching.
  *
  * Attaches click listeners to all tab buttons marked with
  * `data-action="js-fetch-links"`. When a tab is clicked,
  * its corresponding links are fetched and displayed. The
- * last visited tab is restored from localStorage if available;
- * otherwise, the first tab is automatically activated.
+ * active tab/section are restored from URL query params
+ * (`tab` and `section`) when available.
  *
  * @function tabsInit
  * @returns {void}
@@ -14,25 +16,20 @@ export function tabsInit() {
     const buttons = document.querySelectorAll('[data-action="js-fetch-links"]');
     if (!buttons.length) return;
     const searchInput = document.querySelector('[data-js-search]');
+    const { tab: urlTab, section: urlSection } = getStateFromUrl();
 
-    // Reset localStorage if home button was used
+    // Clear active search term if home button was used
     const homeButton = document.querySelector('[js-home-button]');
     homeButton?.addEventListener('click', () => {
-        localStorage.removeItem('lastTab');
-        localStorage.removeItem('lastSection');
         if (searchInput) {
             searchInput.value = '';
         }
         sessionStorage.removeItem('searchTerm');
     });
 
-    // Try to restore the last active tab from localStorage
-    const lastTab = localStorage.getItem('lastTab');
-    const lastSection = localStorage.getItem('lastSection');
-
-    let activeButton = [...buttons].find(btn =>
-        btn.dataset.tabId === lastTab && btn.dataset.sectionId === lastSection
-    );
+    let activeButton = [...buttons].find(btn => (
+        btn.dataset.tabId === urlTab && btn.dataset.sectionId === urlSection
+    ));
 
     if (!activeButton) {
         // Fallback to the first button
@@ -51,15 +48,13 @@ export function tabsInit() {
             // Add it to the clicked one
             button.classList.add('menu-active');
 
-            // Store the active tab
-            localStorage.setItem('lastTab', tabId);
-            localStorage.setItem('lastSection', sectionId);
-
             // Clear any active search term when navigating the menu
             if (searchInput) {
                 searchInput.value = '';
                 sessionStorage.removeItem('searchTerm');
             }
+
+            setStateInUrl({ tab: tabId, section: sectionId });
 
             // Load links for this tab
             displayLinks(tabId, sectionId);
@@ -68,6 +63,13 @@ export function tabsInit() {
 
     // Activate the restored or first tab
     activeButton.classList.add('menu-active');
+    setStateInUrl(
+        {
+            tab: activeButton.dataset.tabId,
+            section: activeButton.dataset.sectionId,
+        },
+        { replace: true }
+    );
     displayLinks(activeButton.dataset.tabId, activeButton.dataset.sectionId);
 }
 

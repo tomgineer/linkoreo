@@ -1,4 +1,5 @@
 import { displayLinks } from '../system/ajax.js';
+import { getStateFromUrl, setStateInUrl } from './state.js';
 
 /**
  * Initializes the search input listener with debounce functionality.
@@ -24,11 +25,13 @@ export default function initSearch() {
         if (!query) {
             clearTimeout(debounceTimer);
             sessionStorage.removeItem(storageKey);
+            setStateInUrl({ q: '' }, { replace: true });
             restoreDefaultSection();
             return;
         }
 
         sessionStorage.setItem(storageKey, query);
+        setStateInUrl({ q: query }, { replace: true });
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
             displaySearchResults(query);
@@ -37,17 +40,20 @@ export default function initSearch() {
 
     // Re-sync results after back/forward cache restore or initial load.
     const syncSearchState = () => {
+        const { q: urlQuery } = getStateFromUrl();
         const inputQuery = searchInput.value.trim();
         const storedQuery = sessionStorage.getItem(storageKey) || '';
-        const query = inputQuery || storedQuery;
+        const query = inputQuery || urlQuery || storedQuery;
         if (query) {
             if (!inputQuery) {
                 searchInput.value = query;
             }
             sessionStorage.setItem(storageKey, query);
+            setStateInUrl({ q: query }, { replace: true });
             displaySearchResults(query);
         } else {
             sessionStorage.removeItem(storageKey);
+            setStateInUrl({ q: '' }, { replace: true });
             restoreDefaultSection();
         }
     };
@@ -72,15 +78,19 @@ export default function initSearch() {
  */
 function restoreDefaultSection() {
     const buttons = document.querySelectorAll('[data-tab-id]');
-    const firstButton = buttons[0];
-    if (!firstButton) return;
+    if (!buttons.length) return;
+
+    const { tab, section } = getStateFromUrl();
+    const activeButton = [...buttons].find(button => (
+        button.dataset.tabId === tab && button.dataset.sectionId === section
+    )) || buttons[0];
 
     // Remove active state from all buttons
     buttons.forEach(btn => btn.classList.remove('menu-active'));
 
-    // Mark the first one active and reload its content
-    firstButton.classList.add('menu-active');
-    displayLinks(firstButton.dataset.tabId, firstButton.dataset.sectionId);
+    // Mark active one and reload its content
+    activeButton.classList.add('menu-active');
+    displayLinks(activeButton.dataset.tabId, activeButton.dataset.sectionId);
 }
 
 /**
@@ -169,16 +179,17 @@ function buildSearchResultsHtml(results, query) {
             <li>
                 <a href="${url}"
                     rel="nofollow"
-                    class="btn shadow-md flex flex-col gap-0 p-8 importance-${importance}
-                           transform transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg">
-                    <span class="text-base font-medium">
+                    class="btn btn-soft shadow-md flex flex-col gap-0 px-4 py-2 importance-${importance}
+                           transform transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg
+                           w-full rounded-xl h-auto">
+                    <span class="text-lg font-medium">
                         ${label}
                     </span>
                     ${
                         description
-                            ? `<span class="text-sm opacity-90 font-normal">
+                            ? `<div class="text-sm opacity-80 font-light limit-text">
                                    ${description}
-                               </span>`
+                               </div>`
                             : ''
                     }
                 </a>
