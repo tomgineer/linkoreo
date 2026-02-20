@@ -17,10 +17,11 @@ export default function initEditLink() {
     const baseUrl = document.querySelector('meta[name="base-url"]')?.content;
     if (!baseUrl) return;
 
+    initReturnToSync({ tabSelect, sectionSelect, baseUrl });
     initEditLinkTabs({ tabSelect, sectionSelect, baseUrl });
-    initEditLinkInitialSection({ tabSelect, sectionSelect, baseUrl, root });
+    initEditLinkInitialSection({ tabSelect, sectionSelect, baseUrl });
     initAiAutoFill();
-    initDeleteLink();
+    initDeleteLink({ tabSelect, sectionSelect, baseUrl });
 }
 
 /**
@@ -35,6 +36,7 @@ function initEditLinkTabs({ tabSelect, sectionSelect, baseUrl }) {
         if (!selectedTabId) return;
 
         await loadSectionsForTab({ tabId: selectedTabId, sectionSelect, baseUrl });
+        syncReturnTo({ tabSelect, sectionSelect, baseUrl });
     });
 }
 
@@ -65,6 +67,66 @@ async function initEditLinkInitialSection({ tabSelect, sectionSelect, baseUrl })
         baseUrl,
         preselectId,
     });
+
+    syncReturnTo({ tabSelect, sectionSelect, baseUrl });
+}
+
+/**
+ * Keeps hidden return_to input synchronized with current tab/section selections.
+ *
+ * @param {Object} options
+ * @param {HTMLSelectElement} options.tabSelect
+ * @param {HTMLSelectElement} options.sectionSelect
+ * @param {string} options.baseUrl
+ * @returns {void}
+ */
+function initReturnToSync({ tabSelect, sectionSelect, baseUrl }) {
+    tabSelect.addEventListener('change', () => {
+        syncReturnTo({ tabSelect, sectionSelect, baseUrl });
+    });
+
+    sectionSelect.addEventListener('change', () => {
+        syncReturnTo({ tabSelect, sectionSelect, baseUrl });
+    });
+
+    syncReturnTo({ tabSelect, sectionSelect, baseUrl });
+}
+
+/**
+ * Builds a return path using selected tab/section.
+ *
+ * @param {Object} options
+ * @param {HTMLSelectElement} options.tabSelect
+ * @param {HTMLSelectElement} options.sectionSelect
+ * @param {string} options.baseUrl
+ * @returns {string}
+ */
+function buildReturnTo({ tabSelect, sectionSelect, baseUrl }) {
+    const tabId = String(tabSelect?.value || '').trim();
+    const sectionId = String(sectionSelect?.value || '').trim();
+
+    const params = new URLSearchParams();
+    if (tabId) params.set('tab', tabId);
+    if (sectionId) params.set('section', sectionId);
+
+    const base = new URL(baseUrl, window.location.origin);
+    const query = params.toString();
+    return query ? `${base.href}?${query}` : base.href;
+}
+
+/**
+ * Writes current return URL into hidden form field.
+ *
+ * @param {Object} options
+ * @param {HTMLSelectElement} options.tabSelect
+ * @param {HTMLSelectElement} options.sectionSelect
+ * @param {string} options.baseUrl
+ * @returns {void}
+ */
+function syncReturnTo({ tabSelect, sectionSelect, baseUrl }) {
+    const returnInput = document.querySelector('[data-js-return-to]');
+    if (!returnInput) return;
+    returnInput.value = buildReturnTo({ tabSelect, sectionSelect, baseUrl });
 }
 
 /**
@@ -153,8 +215,6 @@ function initAiAutoFill() {
     }
 
     aiButton.addEventListener('click', async () => {
-        let urlText = '';
-
         // Step 1: Try to get a valid URL from clipboard
         try {
             const text = (await navigator.clipboard.readText()).trim();
@@ -162,7 +222,6 @@ function initAiAutoFill() {
 
             try {
                 new URL(text); // validate URL
-                urlText = text;
                 urlInput.value = text;
             } catch {
                 return; // Not a URL → stop here
@@ -241,12 +300,9 @@ async function fetchAndFillMetadata({ urlInput, labelInput, descriptionTextarea,
  *
  * @returns {void}
  */
-function initDeleteLink() {
+function initDeleteLink({ tabSelect, sectionSelect, baseUrl }) {
     const deleteBtn = document.querySelector('[data-js-delete-link]');
     if (!deleteBtn) return;
-
-    const baseUrl = document.querySelector('meta[name="base-url"]')?.content;
-    if (!baseUrl) return;
 
     const type = deleteBtn.dataset.type;
     const id   = deleteBtn.dataset.id;
@@ -263,7 +319,7 @@ function initDeleteLink() {
                     'Content-Type': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest',
                 },
-                body: JSON.stringify({}), // optional payload if you need one
+                body: JSON.stringify({}),
             });
 
             if (!response.ok) throw new Error(`HTTP error ${response.status}`);
@@ -271,7 +327,9 @@ function initDeleteLink() {
             const result = await response.json();
 
             if (result.success) {
-                window.location.href = baseUrl;
+                const returnInput = document.querySelector('[data-js-return-to]');
+                const returnTo = (returnInput?.value || '').trim() || buildReturnTo({ tabSelect, sectionSelect, baseUrl });
+                window.location.href = new URL(returnTo, window.location.origin).href;
             } else {
                 console.error('Delete failed:', result.message || result);
                 alert('Delete failed.');

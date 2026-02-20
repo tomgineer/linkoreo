@@ -84,8 +84,7 @@ export async function saveOrder(table, order) {
 
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-        const result = await response.json();
-        console.log(`✅ ${table} order updated:`, result);
+        await response.json();
     } catch (err) {
         console.error(`❌ Error updating ${table} order:`, err);
     }

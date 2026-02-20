@@ -50,7 +50,7 @@ function initDeleteTab() {
                     'Content-Type': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest',
                 },
-                body: JSON.stringify({}), // optional payload if you need one
+                body: JSON.stringify({}),
             });
 
             if (!response.ok) throw new Error(`HTTP error ${response.status}`);

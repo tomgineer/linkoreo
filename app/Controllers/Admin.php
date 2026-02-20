@@ -59,9 +59,15 @@ public function update_link(int $link_id) {
     if (!logged_in()) return;
 
     $data = $this->request->getPost();
-    $this->admin->updateLink($data, $link_id);
+    $returnTo = (string) ($data['return_to'] ?? '');
+    unset($data['return_to']);
 
-    $this->clear_cache();
+    $this->admin->updateLink($data, $link_id);
+    cache()->clean();
+
+    if (trim($returnTo) !== '') {
+        return redirect()->to($returnTo);
+    }
 
     return redirect()->to(base_url());
 }

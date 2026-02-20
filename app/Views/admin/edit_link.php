@@ -15,7 +15,7 @@
                     <!-- Hidden Fields -->
                     <?= csrf_field() ?>
                     <input type="hidden" value="<?= esc($link['section_id']) ?>" data-js-initial-section-id>
-                    <input type="hidden" value="<?=base_url().'?tab='.$link['tab_id'].'&section='.$link['section_id']?>" name="return_to">
+                    <input type="hidden" value="" name="return_to" data-js-return-to>
 
                     <!-- Display-only -->
                     <p class="text-base-content/65 text-xs mb-8">This link was originally created on <span class="badge badge-dash badge-primary mx-1"><?= esc(date('l, d F Y – H:i', strtotime($link['created']))) ?></span> and is identified by ID <span class="badge badge-dash badge-primary mx-1"><?= esc($link['id']) ?></span></p>
