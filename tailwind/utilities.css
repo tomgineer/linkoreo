@@ -6,10 +6,24 @@
     }
 
     /* Importance styles */
+
+    /* Plain */
     .importance-0 {@apply btn-soft;}
-    .importance-1 {@apply btn-soft btn-secondary;}
-    .importance-2 {@apply btn-soft btn-info;}
-    .importance-3 {@apply btn-soft btn-success;}
+
+    /* Important */
+    .importance-1 {
+        @apply border-l-4 border-l-green-600 hover:border-l-green-500;
+    }
+
+    /* Very Important */
+    .importance-2 {
+        @apply border-l-4 border-l-orange-600 hover:border-l-orange-500;
+    }
+
+    /* Game Changer */
+    .importance-3 {
+        @apply border-l-4 border-l-rose-600 hover:border-l-rose-500;
+    }
 
     /* Text Utilities */
     .limit-text {

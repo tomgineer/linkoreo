@@ -25,7 +25,7 @@
             </div>
 
             <?php if ($sectionDesc): ?>
-                <p class="text-sm opacity-70 mb-2">
+                <p class="text-sm opacity-70 mb-4 font-light">
                     <?= esc($sectionDesc) ?>
                 </p>
             <?php endif; ?>
@@ -45,10 +45,10 @@
 
                             <a href="<?= esc($link['url']) ?>"
                                 rel="nofollow"
-                                class="btn shadow-md flex flex-col gap-0 h-16 importance-<?= $link['importance'] ?>
+                                class="btn btn-soft shadow-md flex flex-col gap-0 h-20 importance-<?= $link['importance'] ?>
                                         transform transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg
-                                        w-full text-left">
-                                <span class="text-base font-medium">
+                                        w-full rounded-xl">
+                                <span class="text-lg font-medium">
                                     <?= esc($link['label'] ?: $link['url']) ?>
                                 </span>
 
