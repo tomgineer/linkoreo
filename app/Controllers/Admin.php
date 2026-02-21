@@ -119,9 +119,19 @@ public function update_tab(int $tab_id) {
 
     $data = $this->request->getPost();
     $this->admin->updateTab($data, $tab_id);
+    cache()->clean();
     return redirect()->to( base_url() );
 }
 
+/**
+ * Display the Edit Section page.
+ *
+ * Loads an existing section for editing or initializes defaults for a new one.
+ * Requires the user to be logged in.
+ *
+ * @param int $section_id Section ID to edit (0 to create a new section).
+ * @return \CodeIgniter\HTTP\Response|string|null
+ */
 public function edit_section(int $section_id = 0) {
     if (!logged_in()) return;
 
@@ -164,6 +174,7 @@ public function update_section(int $section_id) {
 
     $data = $this->request->getPost();
     $this->admin->updateSection($data, $section_id);
+    cache()->clean();
     return redirect()->to( base_url() );
 }
 

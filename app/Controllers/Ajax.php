@@ -127,20 +127,6 @@ public function delete_record(string $table, int $id) {
 }
 
 /**
- * Update Order
- */
-// public function update_order($table) {
-//     if ( !logged_in() ) {return;}
-
-// 	if($this->request->getMethod()=='post') {
-// 		$data = $this->request->getJSON(TRUE);
-// 		$this->admin->updateOrder($data, $table);
-// 		$json_data = ['message' => 'done'];
-// 		return $this->respond($json_data);
-// 	}
-// }
-
-/**
  * Returns rendered links view for the given tab and section, using monthly caching.
  *
  * @param int $tab_id     Tab ID to fetch links for.
@@ -155,14 +141,14 @@ public function get_links_view(int $tab_id, int $section_id) {
 
     // Cache settings
     $cacheName = "links_{$tab_id}_{$section_id}";
-    if (!logged_in() && $cachedView = cache($cacheName)) return $cachedView;
+    if (!logged_in() && !isDev() && $cachedView = cache($cacheName)) return $cachedView;
 
     // Generate view content
     $data['links'] = $this->main->getLinksArr($tab_id, $section_id);
     $output = view('site/links', $data);
 
     // Store in cache for 1 month
-    if (!logged_in()) {
+    if (!logged_in() && !isDev()) {
         cache()->save($cacheName, $output, MONTH);
     }
 

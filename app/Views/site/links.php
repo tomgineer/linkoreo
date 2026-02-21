@@ -37,7 +37,7 @@
                         <div class="indicator group relative w-full">
                             <?php if (logged_in()): ?>
                                 <a href="<?= base_url('admin/edit_link/' . $link['id']) ?>"
-                                    class="indicator-item font-semibold badge badge-primary badge-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 right-3"
+                                    class="indicator-item edit-button"
                                     title="Edit this link">
                                     EDIT
                                 </a>
@@ -45,9 +45,7 @@
 
                             <a href="<?= esc($link['url']) ?>"
                                 rel="nofollow"
-                                class="btn btn-soft shadow-md flex flex-col gap-0 px-4 py-2 importance-<?= $link['importance'] ?>
-                                        transform transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg
-                                        w-full rounded-xl h-auto">
+                                class="jumbo-link importance-<?= $link['importance'] ?>">
                                 <span class="text-lg font-medium">
                                     <?= esc($link['label'] ?: $link['url']) ?>
                                 </span>

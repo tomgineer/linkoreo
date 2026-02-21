@@ -24,12 +24,12 @@
     <meta name="twitter:image" content="https://linkoreo.com/icon.jpg">
 
     <!-- Fonts & CSS -->
-	<link rel="stylesheet" href="<?=path_assets()?>fonts/firasans/stylesheet.css?v=<?=LINKOREO_VERSION?>">
-	<link rel="stylesheet" href="<?=path_assets()?>fonts/firacode/stylesheet.css?v=<?=LINKOREO_VERSION?>">
-    <link rel="stylesheet" href="<?=path_css()?>tailwind.css?v=<?=LINKOREO_VERSION?>">
+	<link rel="stylesheet" href="<?= base_url('assets/fonts/firasans/stylesheet.css') ?>?v=<?=LINKOREO_VERSION?>">
+	<link rel="stylesheet" href="<?= base_url('assets/fonts/firacode/stylesheet.css') ?>?v=<?=LINKOREO_VERSION?>">
+    <link rel="stylesheet" href="<?= base_url('css/tailwind.css') ?>?v=<?=LINKOREO_VERSION?>">
 
 	<?= $this->include('components/favicon') ?>
-	<script src="<?=path_js()?>app-dist.js?v=<?=LINKOREO_VERSION?>" defer></script>
+	<script src="<?= base_url('js/app-dist.js') ?>?v=<?=LINKOREO_VERSION?>" defer></script>
 
     <?= $this->renderSection('head') ?>
 

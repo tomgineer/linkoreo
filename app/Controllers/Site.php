@@ -13,7 +13,7 @@ public function links() {
 
     // Cache settings
     $cacheName = 'frontpage';
-    if (!logged_in() && $cachedView = cache($cacheName)) return $cachedView;
+    if (!logged_in() && !isDev() && $cachedView = cache($cacheName)) return $cachedView;
 
     // Generate view content
     $data = [
@@ -23,7 +23,7 @@ public function links() {
     $output = view('site/main', $data);
 
     // Store in cache for 1 month
-    if (!logged_in()) {
+    if (!logged_in() && !isDev()) {
         cache()->save($cacheName, $output, MONTH);
     }
 

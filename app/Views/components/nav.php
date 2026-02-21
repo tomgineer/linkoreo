@@ -1,7 +1,7 @@
 <nav class="navbar bg-base-300 z-999">
     <div class="flex-1">
         <a class="btn btn-ghost text-xl px-1 lg:px-4" href="<?= base_url() ?>" js-home-button>
-            <img class="h-8 w-auto opacity-85 hover:opacity-100 transition-opacity duration-200 select-none" src="<?= path_gfx() . 'logo.svg' ?>" alt="Linkoreo Logo">
+            <img class="h-6 w-auto opacity-85 hover:opacity-100 transition-opacity duration-200 select-none drop-shadow" src="<?= base_url('gfx/logo.svg') ?>" alt="Linkoreo Logo">
         </a>
     </div>
 
@@ -94,40 +94,21 @@
                 class="input input-bordered w-96 text-base hidden lg:flex" />
         <?php endif; ?>
 
-        <div class="dropdown dropdown-end hidden lg:block">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-square">
-                <div class="h-full w-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                </div>
-            </div>
-            <ul
-                tabindex="-1"
-                class="menu dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow">
-
-                <?php if (logged_in()): ?>
-                    <li>
-                        <a href="<?= site_url('users/logout') ?>" class="flex items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-red-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
-                            </svg>
-
-                            <span>Sign out</span>
-                        </a>
-                    </li>
-                <?php else: ?>
-                    <li>
-                        <a href="<?= site_url('sign-in') ?>" class="flex items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-accent">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
-                            </svg>
-                            <span>Sign in</span>
-                        </a>
-                    </li>
-                <?php endif; ?>
-
-            </ul>
-        </div>
+        <?php if (logged_in()): ?>
+            <a class="btn btn-outline border-base-content/30 hover:btn-error hover:border-error"
+                href="<?= site_url('users/logout') ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+                </svg>
+                <span class="hidden lg:block">Sign out</span>
+            </a>
+        <?php else: ?>
+            <a class="btn btn-outline border-base-content/30 hover:btn-success hover:border-success" href="<?= site_url('sign-in') ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                </svg>
+                <span class="hidden lg:block">Sign in</span>
+            </a>
+        <?php endif; ?>
     </div>
 </nav>

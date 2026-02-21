@@ -5,6 +5,18 @@
         @apply bg-cover bg-center bg-no-repeat;
     }
 
+    /* Jumbo Link */
+    .jumbo-link {
+        @apply btn btn-soft shadow-md flex flex-col gap-0 px-4 py-2 transform transition-transform duration-200
+        hover:-translate-y-0.5 hover:shadow-lg w-full rounded-xl h-auto;
+    }
+
+    /* Edit Button */
+    .edit-button {
+        @apply font-semibold badge badge-primary badge-sm opacity-0 group-hover:opacity-100
+        transition-opacity duration-200 z-10 right-3;
+    }
+
     /* Importance styles */
 
     /* Plain */

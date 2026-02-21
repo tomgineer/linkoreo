@@ -2,16 +2,31 @@
 namespace App\Controllers;
 use App\Models\AdminModel;
 
+/**
+ * Handles user authentication session flows.
+ */
 class Users extends BaseController {
 
+    /**
+     * Admin model instance used for maintenance tasks.
+     *
+     * @var AdminModel
+     */
     protected AdminModel $admin;
 
+    /**
+     * Initialize required model dependencies.
+     */
     function __construct() {
         $this->admin = new AdminModel();
     }
 
-
-public function login() {
+    /**
+     * Authenticate a user and initialize a fresh session.
+     *
+     * @return \CodeIgniter\HTTP\RedirectResponse
+     */
+    public function login() {
     $input_data = $this->request->getPost();
 
     if (empty($input_data['email']) || empty($input_data['password'])) {
@@ -44,14 +59,15 @@ public function login() {
     $this->admin->deleteOldSessionFiles();
 
     return redirect()->to(base_url());
-}
+    }
 
 
-/**
- * User Logout
- */
-
-public function logout() {
+    /**
+     * Log out the currently authenticated user.
+     *
+     * @return \CodeIgniter\HTTP\RedirectResponse
+     */
+    public function logout() {
 	if ( !logged_in() ) {return redirect()->to(base_url());}
 
 	$session = session();
@@ -61,6 +77,6 @@ public function logout() {
 
 	$session->destroy();
 	return redirect()->to(base_url());
-}
+    }
 
 } // END Class

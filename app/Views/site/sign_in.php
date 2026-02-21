@@ -5,7 +5,7 @@
 
     <div class="absolute inset-0 -z-10">
         <img
-            src="<?= path_gfx() . 'bg.svg' ?>"
+            src="<?= base_url('gfx/bg.svg') ?>"
             class="h-full w-full object-cover">
     </div>
 
