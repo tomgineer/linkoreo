@@ -13,6 +13,7 @@
 
                     <form class="flex flex-col flex-1 gap-4" action="<?= base_url('admin/update_section/' . $section['id']) ?>" method="post">
                         <?= csrf_field() ?>
+                        <input type="hidden" value="" name="return_to" data-js-return-to>
 
                         <!-- Tab Selection -->
                         <div>

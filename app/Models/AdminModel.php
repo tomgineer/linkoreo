@@ -99,7 +99,7 @@ public function updateTab(array $data, int $tab_id):void{
     $builder = $this->db->table('tabs');
 
     if ($tab_id === 0) {
-        // Insert new link
+        // Insert new tab
         $builder->insert($data);
         return;
     }
@@ -126,12 +126,12 @@ public function updateSection(array $data, int $section_id):void{
     $builder = $this->db->table('sections');
 
     if ($section_id === 0) {
-        // Insert new link
+        // Insert new section
         $builder->insert($data);
         return;
     }
 
-    // Update existing tab
+    // Update existing section
     $builder->where('id', $section_id)
             ->update($data);
 
@@ -192,6 +192,12 @@ public function getSection(int $section_id):?array {
  */
 public function delete_record(string $table, int $id): bool {
     if (empty($table) || $id <= 0) {
+        return false;
+    }
+
+    $allowedTables = ['links', 'sections', 'tabs'];
+    if (! in_array($table, $allowedTables, true)) {
+        log_message('error', "delete_record() rejected invalid table: {$table}");
         return false;
     }
 

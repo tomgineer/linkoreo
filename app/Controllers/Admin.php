@@ -63,7 +63,6 @@ public function update_link(int $link_id) {
     unset($data['return_to']);
 
     $this->admin->updateLink($data, $link_id);
-    cache()->clean();
 
     if (trim($returnTo) !== '') {
         return redirect()->to($returnTo);
@@ -118,8 +117,15 @@ public function update_tab(int $tab_id) {
     }
 
     $data = $this->request->getPost();
+    $returnTo = (string) ($data['return_to'] ?? '');
+    unset($data['return_to']);
+
     $this->admin->updateTab($data, $tab_id);
-    cache()->clean();
+
+    if (trim($returnTo) !== '') {
+        return redirect()->to($returnTo);
+    }
+
     return redirect()->to( base_url() );
 }
 
@@ -173,8 +179,15 @@ public function update_section(int $section_id) {
     }
 
     $data = $this->request->getPost();
+    $returnTo = (string) ($data['return_to'] ?? '');
+    unset($data['return_to']);
+
     $this->admin->updateSection($data, $section_id);
-    cache()->clean();
+
+    if (trim($returnTo) !== '') {
+        return redirect()->to($returnTo);
+    }
+
     return redirect()->to( base_url() );
 }
 
