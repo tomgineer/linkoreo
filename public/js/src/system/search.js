@@ -182,14 +182,14 @@ function buildSearchResultsHtml(results, query) {
                 <a href="${url}"
                     rel="nofollow"
                     class="jumbo-link importance-${importance}">
-                    <span class="text-lg font-medium">
+                    <span>
                         ${label}
                     </span>
                     ${
                         description
-                            ? `<div class="text-sm text-white/70 font-light limit-text">
+                            ? `<span>
                                    ${description}
-                               </div>`
+                               </span>`
                             : ''
                     }
                 </a>

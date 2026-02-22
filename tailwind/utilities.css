@@ -1,4 +1,5 @@
 @layer utilities {
+
     /* Backgrounds */
     .bg-linkoreo {
         background-image: url("../gfx/bg.svg");
@@ -7,20 +8,31 @@
 
     /* Jumbo Link */
     .jumbo-link {
-        @apply btn btn-soft shadow-md flex flex-col items-stretch gap-0 transform transition-transform duration-200
-        hover:-translate-y-0.5 hover:shadow-lg w-full rounded-xl h-auto p-0 overflow-hidden;
+        @apply btn btn-soft shadow-md flex flex-col items-stretch gap-0 transform transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg w-full rounded-xl h-auto p-0 overflow-hidden h-full text-left;
+    }
+
+    /* Jumbo Link Title */
+    .jumbo-link > span:first-child {
+        @apply flex-1 text-lg font-medium leading-tight py-2 px-4 flex items-center;
+
+    }
+
+    /* Jumbo Link Description */
+    .jumbo-link > span:last-child {
+        @apply text-sm text-white/70 font-light bg-white/5 leading-tight py-2 px-4 border-t border-t-white/15;
     }
 
     /* Edit Button */
     .edit-button {
-        @apply font-semibold badge badge-primary badge-sm opacity-0 group-hover:opacity-100
-        transition-opacity duration-200 z-10 right-3;
+        @apply font-semibold badge badge-primary badge-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 right-3;
     }
 
     /* Importance styles */
 
     /* Plain */
-    .importance-0 {@apply btn-soft;}
+    .importance-0 {
+        @apply btn-soft;
+    }
 
     /* Important */
     .importance-1 {

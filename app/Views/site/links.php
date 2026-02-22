@@ -45,15 +45,15 @@
 
                             <a href="<?= esc($link['url']) ?>"
                                 rel="nofollow"
-                                class="jumbo-link importance-<?= $link['importance'] ?> h-full">
-                                <span class="text-lg font-medium flex-1">
+                                class="jumbo-link importance-<?= $link['importance'] ?>">
+                                <span>
                                     <?= esc($link['label'] ?: $link['url']) ?>
                                 </span>
 
                                 <?php if (!empty($link['description'])): ?>
-                                    <div class="text-sm text-white/70 font-light bg-black/50">
+                                    <span>
                                         <?= esc($link['description']) ?>
-                                    </div>
+                                    </span>
                                 <?php endif; ?>
                             </a>
                         </div>

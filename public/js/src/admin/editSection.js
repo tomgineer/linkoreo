@@ -40,9 +40,9 @@ function buildReturnTo({ tabSelect, baseUrl }) {
 /**
  * Initializes the "Delete Section" button functionality.
  *
- * Attaches a click listener to the element with `[data-js-delete-tab]`
- * (reused as the delete button for sections) that sends an AJAX request
- * to delete the current section. On success, redirects to the base URL.
+ * Attaches a click listener to the element with `[data-js-delete-section]`
+ * that sends an AJAX request to delete the current section.
+ * On success, redirects to a computed URL based on selected tab.
  *
  * Requires:
  * - `<meta name="base-url" content="...">`

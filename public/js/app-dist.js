@@ -72,12 +72,12 @@
                 <a href="${s}"
                     rel="nofollow"
                     class="jumbo-link importance-${f}">
-                    <span class="text-lg font-medium">
+                    <span>
                         ${a}
                     </span>
-                    ${i?`<div class="text-sm text-white/70 font-light limit-text">
+                    ${i?`<span>
                                    ${i}
-                               </div>`:""}
+                               </span>`:""}
                 </a>
             </li>
         `}).join("");return`
