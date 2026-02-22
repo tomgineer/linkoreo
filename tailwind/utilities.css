@@ -7,8 +7,8 @@
 
     /* Jumbo Link */
     .jumbo-link {
-        @apply btn btn-soft shadow-md flex flex-col gap-0 px-4 py-2 transform transition-transform duration-200
-        hover:-translate-y-0.5 hover:shadow-lg w-full rounded-xl h-auto;
+        @apply btn btn-soft shadow-md flex flex-col items-stretch gap-0 transform transition-transform duration-200
+        hover:-translate-y-0.5 hover:shadow-lg w-full rounded-xl h-auto p-0 overflow-hidden;
     }
 
     /* Edit Button */
@@ -35,14 +35,6 @@
     /* Game Changer */
     .importance-3 {
         @apply border-l-4 border-l-rose-600 hover:border-l-rose-500 hover:bg-rose-700 hover:text-white;
-    }
-
-    /* Text Utilities */
-    .limit-text {
-        max-width: 35ch;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
 
 }

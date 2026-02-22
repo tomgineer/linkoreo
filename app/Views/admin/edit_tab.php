@@ -13,7 +13,6 @@
 
                     <form class="flex flex-col flex-1 gap-4" action="<?= base_url('admin/update_tab/' . $tab['id']) ?>" method="post">
                         <?= csrf_field() ?>
-                        <input type="hidden" value="<?= esc(((int) $tab['id'] === 0) ? base_url() : base_url('?tab=' . (int) $tab['id'] . '&section=0')) ?>" name="return_to">
 
                         <!-- Title -->
                         <div>

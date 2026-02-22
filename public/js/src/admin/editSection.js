@@ -12,47 +12,29 @@ export default function initEditSection() {
     const root = document.querySelector('[data-js-edit-section]');
     if (!root) return;
 
-    initReturnTo();
     initDeleteSection();
     initFillSectionsList();
     initSorting('sections');
 }
 
 /**
- * Sync hidden return_to input with selected tab context.
+ * Builds a return URL for section actions from the selected tab.
  *
- * @returns {void}
+ * Uses section=0 so redirects remain valid after deleting a section.
+ *
+ * @param {HTMLSelectElement|null} tabSelect
+ * @param {string} baseUrl
+ * @returns {string}
  */
-function initReturnTo() {
-    const returnInput = document.querySelector('[data-js-return-to]');
-    if (!returnInput) return;
+function buildReturnTo({ tabSelect, baseUrl }) {
+    const tabId = String(tabSelect?.value || '').trim();
+    const base = new URL(baseUrl, window.location.origin);
+    if (!tabId) return base.href;
 
-    const tabSelect = document.querySelector('select[name="tab_id"]');
-    if (!tabSelect) return;
-
-    const deleteBtn = document.querySelector('[data-js-delete-section]');
-    const sectionId = String(deleteBtn?.dataset?.id ?? '0').trim() || '0';
-
-    const baseUrl = document.querySelector('meta[name="base-url"]')?.content;
-    if (!baseUrl) return;
-
-    const rootUrl = new URL(baseUrl, window.location.origin);
-
-    const syncReturnTo = () => {
-        const tabId = String(tabSelect.value || '').trim();
-        if (!tabId) {
-            returnInput.value = rootUrl.href;
-            return;
-        }
-
-        const params = new URLSearchParams();
-        params.set('tab', tabId);
-        params.set('section', sectionId);
-        returnInput.value = `${rootUrl.href}?${params.toString()}`;
-    };
-
-    tabSelect.addEventListener('change', syncReturnTo);
-    syncReturnTo();
+    const params = new URLSearchParams();
+    params.set('tab', tabId);
+    params.set('section', '0');
+    return `${base.href}?${params.toString()}`;
 }
 
 /**
@@ -72,6 +54,7 @@ function initDeleteSection() {
     const deleteBtn = document.querySelector('[data-js-delete-section]');
     if (!deleteBtn) return;
 
+    const tabSelect = document.querySelector('select[name="tab_id"]');
     const baseUrl = document.querySelector('meta[name="base-url"]')?.content;
     if (!baseUrl) return;
 
@@ -97,7 +80,7 @@ function initDeleteSection() {
             const result = await response.json();
 
             if (result.success) {
-                window.location.href = baseUrl;
+                window.location.href = new URL(buildReturnTo({ tabSelect, baseUrl }), window.location.origin).href;
             } else {
                 console.error('Delete failed:', result.message || result);
                 alert('Delete failed.');

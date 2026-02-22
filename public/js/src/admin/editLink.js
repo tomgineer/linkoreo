@@ -17,7 +17,6 @@ export default function initEditLink() {
     const baseUrl = document.querySelector('meta[name="base-url"]')?.content;
     if (!baseUrl) return;
 
-    initReturnToSync({ tabSelect, sectionSelect, baseUrl });
     initEditLinkTabs({ tabSelect, sectionSelect, baseUrl });
     initEditLinkInitialSection({ tabSelect, sectionSelect, baseUrl });
     initAiAutoFill();
@@ -36,7 +35,6 @@ function initEditLinkTabs({ tabSelect, sectionSelect, baseUrl }) {
         if (!selectedTabId) return;
 
         await loadSectionsForTab({ tabId: selectedTabId, sectionSelect, baseUrl });
-        syncReturnTo({ tabSelect, sectionSelect, baseUrl });
     });
 }
 
@@ -67,29 +65,6 @@ async function initEditLinkInitialSection({ tabSelect, sectionSelect, baseUrl })
         baseUrl,
         preselectId,
     });
-
-    syncReturnTo({ tabSelect, sectionSelect, baseUrl });
-}
-
-/**
- * Keeps hidden return_to input synchronized with current tab/section selections.
- *
- * @param {Object} options
- * @param {HTMLSelectElement} options.tabSelect
- * @param {HTMLSelectElement} options.sectionSelect
- * @param {string} options.baseUrl
- * @returns {void}
- */
-function initReturnToSync({ tabSelect, sectionSelect, baseUrl }) {
-    tabSelect.addEventListener('change', () => {
-        syncReturnTo({ tabSelect, sectionSelect, baseUrl });
-    });
-
-    sectionSelect.addEventListener('change', () => {
-        syncReturnTo({ tabSelect, sectionSelect, baseUrl });
-    });
-
-    syncReturnTo({ tabSelect, sectionSelect, baseUrl });
 }
 
 /**
@@ -112,21 +87,6 @@ function buildReturnTo({ tabSelect, sectionSelect, baseUrl }) {
     const base = new URL(baseUrl, window.location.origin);
     const query = params.toString();
     return query ? `${base.href}?${query}` : base.href;
-}
-
-/**
- * Writes current return URL into hidden form field.
- *
- * @param {Object} options
- * @param {HTMLSelectElement} options.tabSelect
- * @param {HTMLSelectElement} options.sectionSelect
- * @param {string} options.baseUrl
- * @returns {void}
- */
-function syncReturnTo({ tabSelect, sectionSelect, baseUrl }) {
-    const returnInput = document.querySelector('[data-js-return-to]');
-    if (!returnInput) return;
-    returnInput.value = buildReturnTo({ tabSelect, sectionSelect, baseUrl });
 }
 
 /**
@@ -327,9 +287,7 @@ function initDeleteLink({ tabSelect, sectionSelect, baseUrl }) {
             const result = await response.json();
 
             if (result.success) {
-                const returnInput = document.querySelector('[data-js-return-to]');
-                const returnTo = (returnInput?.value || '').trim() || buildReturnTo({ tabSelect, sectionSelect, baseUrl });
-                window.location.href = new URL(returnTo, window.location.origin).href;
+                window.location.href = new URL(buildReturnTo({ tabSelect, sectionSelect, baseUrl }), window.location.origin).href;
             } else {
                 console.error('Delete failed:', result.message || result);
                 alert('Delete failed.');
@@ -340,3 +298,4 @@ function initDeleteLink({ tabSelect, sectionSelect, baseUrl }) {
         }
     });
 }
+

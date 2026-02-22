@@ -69,15 +69,25 @@ public function deleteOldSessionFiles(int $days = 2):void {
  *
  * @param array $data The form data matching the 'links' table columns.
  * @param int   $link_id The link ID. If 0, a new record will be created.
- * @return void
+ * @return array{tab_id:int,section_id:int}|array
  */
-public function updateLink(array $data, int $link_id):void{
+public function updateLink(array $data, int $link_id): array{
     $builder = $this->db->table('links');
 
     if ($link_id === 0) {
         // Insert new link
         $builder->insert($data);
-        return;
+
+        // Clear all cache after update
+        cache()->clean();
+
+        // Return Tab ID and Section ID
+        return $this->db->table('links l')
+                        ->select(['s.tab_id', 'l.section_id'])
+                        ->join('sections s', 'l.section_id = s.id')
+                        ->where('l.id', $this->db->insertID())
+                        ->get()
+                        ->getRowArray();
     }
 
     // Update existing link
@@ -86,6 +96,14 @@ public function updateLink(array $data, int $link_id):void{
 
     // Clear all cache after update
     cache()->clean();
+
+    // Return Tab ID and Section ID
+    return $this->db->table('links l')
+                    ->select(['s.tab_id', 'l.section_id'])
+                    ->join('sections s', 'l.section_id = s.id')
+                    ->where('l.id', $link_id)
+                    ->get()
+                    ->getRowArray();
 }
 
 /**
@@ -93,15 +111,19 @@ public function updateLink(array $data, int $link_id):void{
  *
  * @param array $data   Tab data to insert or update.
  * @param int   $tab_id Tab ID (0 to insert a new record).
- * @return void
+ * @return array{tab_id:int,section_id:int}
  */
-public function updateTab(array $data, int $tab_id):void{
+public function updateTab(array $data, int $tab_id): array {
     $builder = $this->db->table('tabs');
 
     if ($tab_id === 0) {
         // Insert new tab
         $builder->insert($data);
-        return;
+
+        // Clear all cache after update
+        cache()->clean();
+
+        return ['tab_id' => $this->db->insertID(), 'section_id' => 0];
     }
 
     // Update existing tab
@@ -110,6 +132,8 @@ public function updateTab(array $data, int $tab_id):void{
 
     // Clear all cache after update
     cache()->clean();
+
+    return ['tab_id' => $tab_id, 'section_id' => 0];
 }
 
 /**
@@ -120,15 +144,24 @@ public function updateTab(array $data, int $tab_id):void{
  *
  * @param array $data        Associative array of section fields to save.
  * @param int   $section_id  Section ID (0 to create a new section).
- * @return void
+ * @return array{tab_id:int,section_id:int}|array
  */
-public function updateSection(array $data, int $section_id):void{
+public function updateSection(array $data, int $section_id): array{
     $builder = $this->db->table('sections');
 
     if ($section_id === 0) {
         // Insert new section
         $builder->insert($data);
-        return;
+
+        // Clear all cache after update
+        cache()->clean();
+
+        // Return Tab ID and Section ID
+        return $this->db->table('sections')
+                        ->select(['id as section_id', 'tab_id'])
+                        ->where('id', $this->db->insertID())
+                        ->get()
+                        ->getRowArray();
     }
 
     // Update existing section
@@ -137,6 +170,13 @@ public function updateSection(array $data, int $section_id):void{
 
     // Clear all cache after update
     cache()->clean();
+
+    // Return Tab ID and Section ID
+    return $this->db->table('sections')
+                    ->select(['id as section_id', 'tab_id'])
+                    ->where('id', $section_id)
+                    ->get()
+                    ->getRowArray();
 }
 
 /**

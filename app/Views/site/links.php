@@ -33,8 +33,8 @@
             <ul class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
                 <?php foreach (array_filter($sectionLinks, fn($l) => !empty($l['id'])) as $link): ?>
 
-                    <li>
-                        <div class="indicator group relative w-full">
+                    <li class="h-full">
+                        <div class="indicator group relative w-full h-full">
                             <?php if (logged_in()): ?>
                                 <a href="<?= base_url('admin/edit_link/' . $link['id']) ?>"
                                     class="indicator-item edit-button"
@@ -45,13 +45,13 @@
 
                             <a href="<?= esc($link['url']) ?>"
                                 rel="nofollow"
-                                class="jumbo-link importance-<?= $link['importance'] ?>">
-                                <span class="text-lg font-medium">
+                                class="jumbo-link importance-<?= $link['importance'] ?> h-full">
+                                <span class="text-lg font-medium flex-1">
                                     <?= esc($link['label'] ?: $link['url']) ?>
                                 </span>
 
                                 <?php if (!empty($link['description'])): ?>
-                                    <div class="text-sm text-white/70 font-light limit-text">
+                                    <div class="text-sm text-white/70 font-light bg-black/50">
                                         <?= esc($link['description']) ?>
                                     </div>
                                 <?php endif; ?>

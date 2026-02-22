@@ -50,25 +50,23 @@ public function edit_link(int $link_id = 0) {
 }
 
 /**
- * Handles form submission to update or create a link.
+ * Handles form submission to create or update a link.
  *
- * @param int $link_id The ID of the link being updated.
- * @return \CodeIgniter\HTTP\RedirectResponse|null Redirects after update or null if not logged in.
+ * @param int $link_id The link ID (0 creates a new link, otherwise updates existing).
+ * @return \CodeIgniter\HTTP\RedirectResponse|null Redirects to the returned tab/section or null if not logged in.
  */
 public function update_link(int $link_id) {
     if (!logged_in()) return;
 
     $data = $this->request->getPost();
-    $returnTo = (string) ($data['return_to'] ?? '');
-    unset($data['return_to']);
+    $returnTo = $this->admin->updateLink($data, $link_id);
 
-    $this->admin->updateLink($data, $link_id);
-
-    if (trim($returnTo) !== '') {
-        return redirect()->to($returnTo);
-    }
-
-    return redirect()->to(base_url());
+    return redirect()->to(
+        base_url() . '?' . http_build_query([
+            'tab' => $returnTo['tab_id'],
+            'section' => $returnTo['section_id']
+        ])
+    );
 }
 
 /**
@@ -107,7 +105,7 @@ public function edit_tab(int $tab_id = 0) {
  * Update an existing tab.
  *
  * @param int $tab_id Tab ID to update.
- * @return \CodeIgniter\HTTP\RedirectResponse|null Redirects to base URL or null if not logged in.
+ * @return \CodeIgniter\HTTP\RedirectResponse|null Redirects to returned tab/section or null if not logged in.
  */
 public function update_tab(int $tab_id) {
     if (!logged_in()) return;
@@ -117,16 +115,14 @@ public function update_tab(int $tab_id) {
     }
 
     $data = $this->request->getPost();
-    $returnTo = (string) ($data['return_to'] ?? '');
-    unset($data['return_to']);
+    $returnTo = $this->admin->updateTab($data, $tab_id);
 
-    $this->admin->updateTab($data, $tab_id);
-
-    if (trim($returnTo) !== '') {
-        return redirect()->to($returnTo);
-    }
-
-    return redirect()->to( base_url() );
+    return redirect()->to(
+        base_url() . '?' . http_build_query([
+            'tab' => $returnTo['tab_id'],
+            'section' => $returnTo['section_id']
+        ])
+    );
 }
 
 /**
@@ -179,16 +175,14 @@ public function update_section(int $section_id) {
     }
 
     $data = $this->request->getPost();
-    $returnTo = (string) ($data['return_to'] ?? '');
-    unset($data['return_to']);
+    $returnTo = $this->admin->updateSection($data, $section_id);
 
-    $this->admin->updateSection($data, $section_id);
-
-    if (trim($returnTo) !== '') {
-        return redirect()->to($returnTo);
-    }
-
-    return redirect()->to( base_url() );
+    return redirect()->to(
+        base_url() . '?' . http_build_query([
+            'tab' => $returnTo['tab_id'],
+            'section' => $returnTo['section_id']
+        ])
+    );
 }
 
 /**
