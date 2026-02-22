@@ -25,12 +25,12 @@
             </div>
 
             <?php if ($sectionDesc): ?>
-                <p class="text-sm opacity-70 mb-4 font-light">
+                <p class="text-sm opacity-70 mb-2 font-light">
                     <?= esc($sectionDesc) ?>
                 </p>
             <?php endif; ?>
 
-            <ul class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+            <ul class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-x-4 gap-y-6 mb-8">
                 <?php foreach (array_filter($sectionLinks, fn($l) => !empty($l['id'])) as $link): ?>
 
                     <li class="h-full">
