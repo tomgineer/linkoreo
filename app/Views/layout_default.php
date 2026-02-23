@@ -28,9 +28,13 @@
 	<link rel="stylesheet" href="<?= base_url('assets/fonts/firacode/stylesheet.css') ?>?v=<?=LINKOREO_VERSION?>">
     <link rel="stylesheet" href="<?= base_url('css/tailwind.css') ?>?v=<?=LINKOREO_VERSION?>">
 
-	<?= $this->include('components/favicon') ?>
-	<script src="<?= base_url('js/app-dist.js') ?>?v=<?=LINKOREO_VERSION?>" defer></script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="<?=base_url('gfx/favicon/favicon.svg')?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?=base_url('gfx/favicon/favicon-32.png')?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?=base_url('gfx/favicon/apple-touch-icon.png')?>">
+    <link rel="icon" href="<?=base_url('gfx/favicon/favicon.ico')?>">
 
+	<script src="<?= base_url('js/app-dist.js') ?>?v=<?=LINKOREO_VERSION?>" defer></script>
     <?= $this->renderSection('head') ?>
 
 </head>

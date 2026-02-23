@@ -1,7 +1,7 @@
 <nav class="navbar bg-base-300 z-999">
     <div class="flex-1">
         <a class="btn btn-ghost text-xl px-1 lg:px-4" href="<?= base_url() ?>" js-home-button>
-            <img class="h-6 w-auto opacity-85 hover:opacity-100 transition-opacity duration-200 select-none drop-shadow" src="<?= base_url('gfx/logo.svg') ?>" alt="Linkoreo Logo">
+            <img class="h-6 w-auto opacity-85 hover:opacity-100 transition-opacity duration-200 select-none drop-shadow" src="<?=base_url('gfx/logo.svg')?>?v=<?=LINKOREO_VERSION?>" alt="Linkoreo Logo">
         </a>
     </div>
 
