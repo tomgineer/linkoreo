@@ -95,19 +95,19 @@
         <?php endif; ?>
 
         <?php if (logged_in()): ?>
-            <a class="btn btn-square lg:w-auto lg:px-4 btn-outline border-base-content/30 hover:btn-error hover:border-error"
+            <a class="btn hidden lg:inline-flex lg:px-4 btn-outline border-base-content/30 hover:btn-error hover:border-error"
                 href="<?= site_url('users/logout') ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                 </svg>
-                <span class="hidden lg:block">Sign out</span>
+                <span>Sign out</span>
             </a>
         <?php else: ?>
-            <a class="btn btn-square lg:w-auto lg:px-4 btn-outline border-base-content/30 hover:btn-success hover:border-success" href="<?= site_url('sign-in') ?>">
+            <a class="btn hidden lg:inline-flex lg:px-4 btn-outline border-base-content/30 hover:btn-success hover:border-success" href="<?= site_url('sign-in') ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
                 </svg>
-                <span class="hidden lg:block">Sign in</span>
+                <span>Sign in</span>
             </a>
         <?php endif; ?>
     </div>

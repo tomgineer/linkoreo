@@ -19,7 +19,7 @@
 
     /* Jumbo Link Description */
     .jumbo-link > span:last-child {
-        @apply text-sm text-white/80 font-light bg-white/5 leading-tight py-2 px-4 border-t border-t-white/20;
+        @apply text-sm text-white/80 font-light bg-white/5 leading-tight py-2 px-4 border-t border-t-white/15;
     }
 
     /* Edit Button */
