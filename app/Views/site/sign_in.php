@@ -22,7 +22,10 @@
                         Follow the journey on
                         <a class="text-info underline" href="https://github.com/tomgineer/linkoreo" target="_blank" rel="nofollow noopener noreferrer">GitHub</a>
                         and see how it evolves.
-                        Currently <span class="text-info"><?= $count ?></span> bookmarks have been served
+                    </p>
+                    <p class="mt-4 text-sm md:text-base text-base-content/80">
+                        Currently <span class="text-info"><?= $count ?></span> bookmarks have been served in
+                        <span class="text-info">{elapsed_time}</span> sec for
                         <span class="text-info"><?= nf($hits) ?></span> times.
                         You are browsing version <span class="text-info">v<?= LINKOREO_VERSION ?></span>.
                     </p>
